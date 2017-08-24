@@ -31,14 +31,12 @@ class HornContainer extends Component {
               autoLoad={true}
               playFromPosition={140}
               playStatus={playStatus === 'A' ? 'PLAYING' : 'STOPPED' }
-              ignoreMobileRestrictions={true}
             />
             <Sound
               url={'airhorn.mp3'}
               autoLoad={true}
               playFromPosition={140}
               playStatus={playStatus === 'B' ? 'PLAYING' : 'STOPPED' }
-              ignoreMobileRestrictions={true}
             />
         </div>
       )
