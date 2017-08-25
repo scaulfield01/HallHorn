@@ -27,15 +27,13 @@ class HornContainer extends Component {
         <div className="HornContainer">
           <HornButton handleHornClick={this.handleHornClick}/>
             <Sound
-              url={'airhorn.mp3'}
+              url={'airhornNew.mp3'}
               autoLoad={true}
-              playFromPosition={170}
               playStatus={playStatus === 'A' ? 'PLAYING' : 'STOPPED' }
             />
             <Sound
-              url={'airhorn.mp3'}
+              url={'airhornNew.mp3'}
               autoLoad={true}
-              playFromPosition={170}
               playStatus={playStatus === 'B' ? 'PLAYING' : 'STOPPED' }
             />
         </div>
