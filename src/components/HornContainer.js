@@ -13,7 +13,6 @@ class HornContainer extends Component {
         }
         this.handleHornClick = this.handleHornClick.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
-        this.handleLoadError = this.handleLoadError.bind(this);
     }
 
     handleHornClick() {
