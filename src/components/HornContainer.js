@@ -9,9 +9,7 @@ class HornContainer extends Component {
         super(props);
         this.state = {
             playing: false,
-            loading: true,
-            error: false
-            //container state loading, playing, error  
+            loading: true
         }
         this.handleHornClick = this.handleHornClick.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
@@ -25,10 +23,6 @@ class HornContainer extends Component {
 
     handleLoad() {
         this.setState({ loading: false });
-    }
-
-    handleLoadError() {
-
     }
 
     render() {
