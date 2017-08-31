@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 // import Sound from 'react-sound';
 import HornButton from './HornButton';
-import ReactHowler from 'react-howler'
-
-
-
+import ReactHowler from 'react-howler';
+import { BounceLoader } from 'react-spinners';
 
 class HornContainer extends Component {
     constructor(props) {
@@ -12,20 +10,12 @@ class HornContainer extends Component {
         this.state = {
             playing: false,
             loading: true,
-            error: false 
+            error: false
+            //container state loading, playing, error  
         }
         this.handleHornClick = this.handleHornClick.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
         this.handleLoadError = this.handleLoadError.bind(this);
-    }
-
-    componentWillMount() {
-        // new Howler({ src: ['airhornNew.mp3'] });
-        // console.log(this.player.h)
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-
     }
 
     handleHornClick() {
@@ -45,7 +35,7 @@ class HornContainer extends Component {
         const { loading, playing } = this.state;
         return (
             <div className="HornContainer">
-                {loading ? <p>loading</p> : <HornButton handleHornClick={this.handleHornClick}/>}
+                {loading ? <BounceLoader color={'#02AF92'} /> : <HornButton handleHornClick={this.handleHornClick}/>}
                 <ReactHowler
                     preload
                     src='airhornNew.mp3'
