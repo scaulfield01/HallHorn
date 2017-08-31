@@ -1,62 +1,62 @@
 import React, { Component } from 'react';
-import Sound from 'react-sound';
+// import Sound from 'react-sound';
 import HornButton from './HornButton';
+import ReactHowler from 'react-howler'
+
+
+
 
 class HornContainer extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   playStatus: 'initial', // 'A or B'
-    // }
-    this.state = {
-      sounds: [],
-      currentPlay: 0,
-      loading: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            playing: false,
+            loading: true,
+            error: false 
+        }
+        this.handleHornClick = this.handleHornClick.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
+        this.handleLoadError = this.handleLoadError.bind(this);
     }
-    this.handleHornClick = this.handleHornClick.bind(this);
-    this.handleLoading = this.handleLoading.bind(this);
-    this.handlePlaying = this.handlePlaying.bind(this);
-  }
 
-  componentWillMount() {
-    
-  }
+    componentWillMount() {
+        // new Howler({ src: ['airhornNew.mp3'] });
+        // console.log(this.player.h)
+    }
 
-  componentWillUpdate(nextProps, nextState) {
-    // if(nextState.sounds.length > 1) {
-    // }
-    console.log(nextProps)
-    console.log(nextState)
-  } 
+    componentWillUpdate(nextProps, nextState) {
 
-  handleHornClick(e) {
-    this.setState({ 
-      sounds: this.state.sounds.concat({ url: 'airhornNew.mp3', playStatus:'PLAYING' }),
-      currentPlay: this.state.currentPlay += 1
-    })
-  }
+    }
 
-  handleLoading(e) {
-    // if(this.state.currentPlay === 0) {
-      debugger
-    // }
-  }
+    handleHornClick() {
+        this.player.stop();
+        this.setState({ playing: true});
+    }
 
-  handlePlaying() {
-    // if(this.state.loading) {
-    //   this.setState({loading: this.state.loading})
-    // }
-  }
+    handleLoad() {
+        this.setState({ loading: false });
+    }
 
-  render() {
-    const { sounds, loading } = this.state;
-      return (
-        <div className="HornContainer">
-            {this.loading ? <p>loading</p> : <HornButton handleHornClick={this.handleHornClick}/>}
-            {sounds.map((sound, index) => <Sound className="sound" url={sound.url} autoLoad={true} playStatus={sound.playStatus} onLoading={this.handleLoading()} onPlaying={this.handlePlaying} />)}
-        </div>
-      )
-  }
+    handleLoadError() {
+
+    }
+
+    render() {
+        const { loading, playing } = this.state;
+        return (
+            <div className="HornContainer">
+                {loading ? <p>loading</p> : <HornButton handleHornClick={this.handleHornClick}/>}
+                <ReactHowler
+                    preload
+                    src='airhornNew.mp3'
+                    playing={playing}
+                    onLoad={this.handleLoad}
+                    onLoadError={this.handleLoadError}
+                    ref={(ref) => (this.player = ref)}
+                />
+            </div>
+        )
+    }
 }
 
 export default HornContainer;
