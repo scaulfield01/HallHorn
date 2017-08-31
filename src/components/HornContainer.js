@@ -1,48 +1,44 @@
 import React, { Component } from 'react';
-import Sound from 'react-sound';
 import HornButton from './HornButton';
+import ReactHowler from 'react-howler';
+import { BounceLoader } from 'react-spinners';
 
 class HornContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playStatus: 'initial', // 'A or B'
+    constructor(props) {
+        super(props);
+        this.state = {
+            playing: false,
+            loading: true
+        }
+        this.handleHornClick = this.handleHornClick.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
     }
-    this.handleHornClick = this.handleHornClick.bind(this);
-  }
 
-  handleHornClick(e) {
-    if (this.state.playStatus === 'initial') {
-      this.setState({ playStatus: 'A' }); 
-    } else if (this.state.playStatus === 'A') {
-      this.setState({ playStatus: 'B' });
-    } else if (this.state.playStatus === 'B') {
-      this.setState({ playStatus: 'A' });
+    handleHornClick() {
+        this.player.stop();
+        this.setState({ playing: true});
     }
-  }
 
-  render() {
-    const { playStatus } = this.state;
-      return (
-        <div className="HornContainer">
-          <HornButton handleHornClick={this.handleHornClick}/>
-            <Sound
-              url={'airhorn.mp3'}
-              autoLoad={true}
-              playFromPosition={140}
-              playStatus={playStatus === 'A' ? 'PLAYING' : 'STOPPED' }
-              ignoreMobileRestrictions={true}
-            />
-            <Sound
-              url={'airhorn.mp3'}
-              autoLoad={true}
-              playFromPosition={140}
-              playStatus={playStatus === 'B' ? 'PLAYING' : 'STOPPED' }
-              ignoreMobileRestrictions={true}
-            />
-        </div>
-      )
-  }
+    handleLoad() {
+        this.setState({ loading: false });
+    }
+
+    render() {
+        const { loading, playing } = this.state;
+        return (
+            <div className="HornContainer">
+                {loading ? <BounceLoader color={'#02AF92'} /> : <HornButton onTouchStart="" handleHornClick={this.handleHornClick}/>}
+                <ReactHowler
+                    preload
+                    src='airhornNew.mp3'
+                    playing={playing}
+                    onLoad={this.handleLoad}
+                    onLoadError={this.handleLoadError}
+                    ref={(ref) => (this.player = ref)}
+                />
+            </div>
+        )
+    }
 }
 
 export default HornContainer;
