@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Sound from 'react-sound';
 import HornButton from './HornButton';
 import ReactHowler from 'react-howler';
 import { BounceLoader } from 'react-spinners';
@@ -28,7 +27,7 @@ class HornContainer extends Component {
         const { loading, playing } = this.state;
         return (
             <div className="HornContainer">
-                {loading ? <BounceLoader color={'#02AF92'} /> : <HornButton handleHornClick={this.handleHornClick}/>}
+                {loading ? <BounceLoader color={'#02AF92'} /> : <HornButton onTouchStart="" handleHornClick={this.handleHornClick}/>}
                 <ReactHowler
                     preload
                     src='airhornNew.mp3'
